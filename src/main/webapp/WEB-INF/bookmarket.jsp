@@ -81,15 +81,15 @@
 										<!-- **** Button that points to Book View ************ -->
 										<div class="col">
 											<button class="btn btn-primary btn-sm round"
-												onclick="window.location.href='/books/${ eachBook.id }';">View</button>
+												onclick="window.location.href='/bookmarket/${ eachBook.id }';">View</button>
 										</div> <c:choose>
 											<c:when test="${user_id == eachBook.owner.id}">
 												<div class="col">
 													<button class="btn btn-warning btn-sm round"
-														onclick="window.location.href='/books/${ eachBook.id }/edit';">Edit</button>
+														onclick="window.location.href='/bookmarket/${ eachBook.id }/edit';">Edit</button>
 												</div>
 												<!-- **** Button that deletes Book ************ -->
-												<form class="col" action="/books/${ eachBook.id }/delete"
+												<form class="col" action="/market/${ eachBook.id }/delete"
 													method="post">
 													<input type="hidden" name="_method" value="delete">
 													<!-- ### Converts method of form to DELETE ### -->

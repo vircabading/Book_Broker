@@ -39,8 +39,8 @@ public class BookmarketController {
 	//	Show information from a Book
 
 	//	**** GET: Render book information **************************
-	@GetMapping("bookmarket/{id}")
-	public String booksId(@PathVariable("id") Long id, Model model, HttpSession session) {
+	@GetMapping("/{id}")
+	public String bookmarketId(@PathVariable("id") Long id, Model model, HttpSession session) {
 		//	---- Check if User is Logged In  -----------------------
 		if (session.isNew() || session.getAttribute("user_id") == null) {
 			return "redirect:/";

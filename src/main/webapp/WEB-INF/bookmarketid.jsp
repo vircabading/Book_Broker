@@ -46,7 +46,35 @@
 	<!-- //// MAIN AREA //////////////////////////////////////// -->
 	<main role="main">
 		<div class="container mt-4">
-			<h1>Bookmarket view</h1>
+			<h1>${ book.title }</h1>
+			<div class="bg-info round p-3">
+				<h3>
+					<strong class="text-danger">${ book.owner.userName }</strong> read <strong
+						class="text-primary">${ book.title }</strong> by <strong
+						class="text-success">${ book.author }</strong>
+				</h3>
+				<p>Here are ${ book.owner.userName }'s thoughts:</p>
+				<div class="card p-3 round">
+					<p>${ book.myThoughts }</p>
+				</div>
+				<c:choose>
+					<c:when test="${user_id == book.owner.id}">
+						<div class="row mt-3">
+							<div class="col-2">
+								<button class="btn btn-warning btn-sm round"
+									onclick="window.location.href='/books/${ book.id }/edit';">Edit</button>
+							</div>
+							<!-- **** Button that deletes Book ************ -->
+							<form class="col-2" action="/books/${ book.id }/delete"
+								method="post">
+								<!-- ### Converts method of form to DELETE ### -->
+								<input type="hidden" name="_method" value="delete">
+								<button class="btn btn-danger btn-sm round">Delete</button>
+							</form>
+						</div>
+					</c:when>
+				</c:choose>
+			</div>
 		</div>
 	</main>
 
