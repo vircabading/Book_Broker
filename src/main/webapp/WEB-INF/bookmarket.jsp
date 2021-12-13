@@ -54,7 +54,7 @@
 						<p>Available Books to borrow:</p>
 						<div class="d-flex justify-content-end align-items-center">
 							<button class="col btn btn-warning btn-sm round"
-								onclick="window.location.href='/books/new';">Add a Book
+								onclick="window.location.href='/bookmarket/new';">Add a Book
 								to my Shelf</button>
 						</div>
 					</div>

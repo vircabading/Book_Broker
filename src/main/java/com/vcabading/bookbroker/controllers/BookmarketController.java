@@ -54,12 +54,12 @@ public class BookmarketController {
 		return "booksid.jsp";
 	}
 
-	//	//// BOOKS NEW /////////////////////////////////////////////
-	//	Add a Book to books table
+	//	//// BOOKMARKET NEW /////////////////////////////////////////////
+	//	Add a Book to bookmarket
 
 	//	**** GET: Render Form **************************************
-	@GetMapping("/books/new")
-	public String booksNew(Model model, HttpSession session) {
+	@GetMapping("/bookmarket/new")
+	public String bookmarketNew(Model model, HttpSession session) {
 		//    	---- Check if User is Logged In  -------------------
 		if (session.isNew() || session.getAttribute("user_id") == null) {
 			return "redirect:/";
@@ -70,7 +70,7 @@ public class BookmarketController {
 		//	---- Get a New Book ------------------------------------
 		Book newBook = new Book();
 		model.addAttribute("newBook", newBook);
-		return "booksnew.jsp";
+		return "bookmarketnew.jsp";
 	}
 
 	//	**** POST: Add New Book to database *************************
