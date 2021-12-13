@@ -58,12 +58,13 @@ public class BookmarketController {
 	//	Add a Book to bookmarket
 
 	//	**** GET: Render Form **************************************
-	@GetMapping("/bookmarket/new")
+	@GetMapping("/new")
 	public String bookmarketNew(Model model, HttpSession session) {
 		//    	---- Check if User is Logged In  -------------------
 		if (session.isNew() || session.getAttribute("user_id") == null) {
 			return "redirect:/";
 		}
+		System.out.println("**** In GET: /bookmarket/new ****");
 		//	---- Get the Log In User -------------------------------
 		User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
 		model.addAttribute("loggedInUser", loggedInUser);
@@ -74,9 +75,10 @@ public class BookmarketController {
 	}
 
 	//	**** POST: Add New Book to database *************************
-	@PostMapping("books/new")
+	@PostMapping("/new")
 	public String booksNewPost(@Valid @ModelAttribute("newBook") Book newBook, BindingResult result, Model model,
 			HttpSession session) {
+		System.out.println("**** In POST: /bookmarket/new ****");
 		// 	---- Check if User is Logged In  ------------------------
 		if (session.isNew() || session.getAttribute("user_id") == null) {
 			return "redirect:/";
