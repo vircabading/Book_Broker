@@ -86,8 +86,8 @@ public class User {
     public User() {}
 
     //	//// GETTERS AND SETTERS ////////////////////////////
-    
-	public Long getId() {
+
+    public Long getId() {
 		return id;
 	}
 
@@ -127,6 +127,22 @@ public class User {
 		this.confirm = confirm;
 	}
 
+	public List<Book> getOwnedBooks() {
+		return ownedBooks;
+	}
+
+	public void setOwnedBooks(List<Book> ownedBooks) {
+		this.ownedBooks = ownedBooks;
+	}
+
+	public List<Book> getBorrowedBooks() {
+		return borrowedBooks;
+	}
+
+	public void setBorrowedBooks(List<Book> borrowedBooks) {
+		this.borrowedBooks = borrowedBooks;
+	}
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -143,12 +159,4 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	public List<Book> getBookList() {
-		return bookList;
-	}
-
-	public void setBookList(List<Book> bookList) {
-		this.bookList = bookList;
-	}
-    
 }

@@ -27,18 +27,23 @@ public class UserService {
     
     //	**** Register a New User *******************************
     public User register(User newUser, BindingResult result) {
-        if(userRepo.findByEmail(newUser.getEmail()).isPresent()) {		// Check if E-mail is already in database
+    	// Check if E-mail is already in database
+        if(userRepo.findByEmail(newUser.getEmail()).isPresent()) {		
             result.rejectValue("email", "Unique", "This email is already in use!");
         }
+        // Check if User Name is already in database
         if(userRepo.findByUserName(newUser.getUserName()).isPresent()) {
             result.rejectValue("userName", "Unique", "This Name is already in use!");
         }
-        if(!newUser.getPassword().equals(newUser.getConfirm())) {		// Check to make sure password matches confirm password
+        // Check to make sure password matches confirm password
+        if(!newUser.getPassword().equals(newUser.getConfirm())) {		
             result.rejectValue("confirm", "Matches", "The Confirm Password must match Password!");
         }
-        if(result.hasErrors()) {										// Check if there are errors on the form
+        // Check if there are errors on the form
+        if(result.hasErrors()) {										
             return null;
-        } else {														// BCrypt hash the password then create a new User
+        } else {
+        	// BCrypt hash the password then create a new User
             String hashed = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
             newUser.setPassword(hashed);
             return userRepo.save(newUser);

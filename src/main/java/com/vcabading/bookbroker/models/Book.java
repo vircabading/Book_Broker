@@ -46,8 +46,13 @@ public class Book {
 	
 	// 	**** MANY:TO:ONE RELATIONSHIP ************************
 	@ManyToOne( fetch = FetchType.LAZY )
-	@JoinColumn( name="user_id" )
-	private User user;
+	@JoinColumn( name="owner_id" )
+	private User owner;
+	
+	// 	**** MANY:TO:ONE RELATIONSHIP ************************
+	@ManyToOne( fetch = FetchType.LAZY )
+	@JoinColumn( name="sender_id" )
+	private User sender;
 	
 	@Column(updatable=false)		// this will not allow createdAt to be updated after creation
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -70,8 +75,8 @@ public class Book {
 
 	public Book() {}
 
-	//	//// GETTERS AND SETTERS /////////////////////////////	
-	
+	//	//// GETTERS AND SETTERS /////////////////////////////
+
 	public long getId() {
 		return id;
 	}
@@ -96,12 +101,28 @@ public class Book {
 		this.author = author;
 	}
 
-	public User getUser() {
-		return user;
+	public String getMyThoughts() {
+		return myThoughts;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setMyThoughts(String myThoughts) {
+		this.myThoughts = myThoughts;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	public User getSender() {
+		return sender;
+	}
+
+	public void setSender(User sender) {
+		this.sender = sender;
 	}
 
 	public Date getCreatedAt() {
@@ -120,12 +141,4 @@ public class Book {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getMyThoughts() {
-		return myThoughts;
-	}
-
-	public void setMyThoughts(String myThoughts) {
-		this.myThoughts = myThoughts;
-	}
-	
 }
