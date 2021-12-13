@@ -40,8 +40,9 @@ public class HomeController {
     //	**** Display the root with Registration and Log-in Forms ***
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
-    	if (session.getAttribute("user_id") != null) {		// If user is in session
-    		return "redirect:/books";					//		re-route to dashboard
+    	//	==== If User is in session --> re-route to dashboard
+    	if (session.getAttribute("user_id") != null) {
+    		return "redirect:/bookmarket";
     	}
     	
         model.addAttribute("newUser", new User());
@@ -50,7 +51,7 @@ public class HomeController {
     }
     
     //	**** Display DASHBOARD *************************************
-    @GetMapping("/books")
+    @GetMapping("/bookmarket")
     public String dashboard(Model model, HttpSession session) {
     	//	---- Check if User is Logged In  -----------------------
     	if (session.isNew() || session.getAttribute("user_id") == null) {
