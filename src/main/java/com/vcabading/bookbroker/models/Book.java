@@ -41,7 +41,7 @@ public class Book {
 	private String author;
 	
 	@NotNull
-	@Size(min=1, max=255, message="Thoughts must be one to two hundred fifty-five characters in length")
+	@Size(min=1, max=1255, message="Thoughts must be one to one thousand two hundred fifty-five characters in length")
 	private String myThoughts;
 	
 	// 	**** MANY:TO:ONE RELATIONSHIP ************************
@@ -51,8 +51,8 @@ public class Book {
 	
 	// 	**** MANY:TO:ONE RELATIONSHIP ************************
 	@ManyToOne( fetch = FetchType.LAZY )
-	@JoinColumn( name="sender_id" )
-	private User sender;
+	@JoinColumn( name="borrower_id" )
+	private User borrower;
 	
 	@Column(updatable=false)		// this will not allow createdAt to be updated after creation
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -117,12 +117,12 @@ public class Book {
 		this.owner = owner;
 	}
 
-	public User getSender() {
-		return sender;
+	public User getBorrower() {
+		return borrower;
 	}
 
-	public void setSender(User sender) {
-		this.sender = sender;
+	public void setBorrower(User borrower) {
+		this.borrower = borrower;
 	}
 
 	public Date getCreatedAt() {

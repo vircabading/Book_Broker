@@ -41,12 +41,11 @@ public class User {
     private String userName;
     
     @NotEmpty(message="Email is required!")
-
     @Email(message="Please enter a valid email!")
     private String email;
     
 //    @Pattern(regexp="^(?:[A-Z].*[0-9])|(?:[0-9].*[A-Z])$",
-//    		message = "Password must have at least One Capital Letter and One Nummerical character")
+//    		message = "Password must have at least One Capital Letter and One Numerical character")
     @NotEmpty(message="Password is required!")
     @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
     private String password;

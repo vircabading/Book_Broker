@@ -63,7 +63,7 @@ public class HomeController {
     	//	---- Get All Books -------------------------------------
     	List<Book> bookList = this.bookServ.retrieveAll();
     	model.addAttribute("bookList", bookList);
-    	return "dashboard.jsp";
+    	return "bookmarket.jsp";
     }
     
     //	//// CREATE ////////////////////////////////////////////////
@@ -79,7 +79,7 @@ public class HomeController {
             return "index.jsp";
         }
         session.setAttribute("user_id", newUser.getId());
-        return "redirect:/books";
+        return "redirect:/bookmarket";
     }
     
     //	**** POST: Login the User ***********************************
@@ -93,7 +93,7 @@ public class HomeController {
             return "index.jsp";
         }
         session.setAttribute("user_id", user.getId());
-        return "redirect:/books";
+        return "redirect:/bookmarket";
     }
     
     //	//// DELETE //////////////////////////////////////////////////

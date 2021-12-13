@@ -1,4 +1,4 @@
-package com.vcabading.bookbroker.controllers;
+package com.vcabading.bookbroker.controllers.depracated;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -87,7 +87,7 @@ public class BookController {
     	if (result.hasErrors()) {
             return "booksnew.jsp";
         } else {
-        	newBook.setUser(loggedInUser);
+        	//newBook.setUser(loggedInUser);
             this.bookServ.create(newBook);
             return "redirect:/books";
         }
@@ -125,7 +125,7 @@ public class BookController {
     	//	---- Get the Log In User --------------------------------
     	User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
     	model.addAttribute("loggedInUser", loggedInUser);
-    	oldBook.setUser(loggedInUser);
+    	//oldBook.setUser(loggedInUser);
     	if (result.hasErrors()) {
             return "booksidedit.jsp";
         } else {
