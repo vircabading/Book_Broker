@@ -83,7 +83,7 @@
 											<button class="btn btn-primary btn-sm round"
 												onclick="window.location.href='/books/${ eachBook.id }';">View</button>
 										</div> <c:choose>
-											<c:when test="${user_id == eachBook.user.id}">
+											<c:when test="${user_id == eachBook.owner.id}">
 												<div class="col">
 													<button class="btn btn-warning btn-sm round"
 														onclick="window.location.href='/books/${ eachBook.id }/edit';">Edit</button>

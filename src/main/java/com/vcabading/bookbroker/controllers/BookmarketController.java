@@ -39,7 +39,7 @@ public class BookmarketController {
 	//	Show information from a Book
 
 	//	**** GET: Render book information **************************
-	@GetMapping("books/{id}")
+	@GetMapping("bookmarket/{id}")
 	public String booksId(@PathVariable("id") Long id, Model model, HttpSession session) {
 		//	---- Check if User is Logged In  -----------------------
 		if (session.isNew() || session.getAttribute("user_id") == null) {
@@ -51,7 +51,7 @@ public class BookmarketController {
 		//	---- Get Book specified by ID --------------------------
 		Book book = this.bookServ.retrieveBook(id);
 		model.addAttribute("book", book);
-		return "booksid.jsp";
+		return "bookmarketid.jsp";
 	}
 
 	//	//// BOOKMARKET NEW /////////////////////////////////////////////
@@ -87,11 +87,12 @@ public class BookmarketController {
 		User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
 		model.addAttribute("loggedInUser", loggedInUser);
 		if (result.hasErrors()) {
-			return "booksnew.jsp";
+			return "bookmarketnew.jsp";
 		} else {
 			//newBook.setUser(loggedInUser);
+			newBook.setOwner(loggedInUser);
 			this.bookServ.create(newBook);
-			return "redirect:/books";
+			return "redirect:/bookmarket";
 		}
 	}
 

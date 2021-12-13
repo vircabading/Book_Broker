@@ -10,7 +10,7 @@
 <%@ page isErrorPage="true"%>
 
 <!--/////////////////////////////////////////////////////
-//	DASHBOARD JSP
+//	BOOKMARKET ID JSP
 ///////////////////////////////////////////////////////// -->
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 <!-- //// CSS LINKS //////////////////////////////////////// -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<title>Book Club</title>
+<title>Book Broker</title>
 </head>
 <body>
 	<!-- //// HEADER /////////////////////////////////////////// -->
@@ -30,12 +30,12 @@
 		<div class="navbar navbar-dark bg-dark box-shadow">
 			<div class="container d-flex justify-content-between">
 				<a href="/" class="col-8 navbar-brand"> <strong
-					class="text-warning">BOOK CLUB</strong>
+					class="text-warning">BOOK BROKER</strong>
 				</a>
 				<div class="col-4 row align-items-center">
 					<p class="col text-white m-2">${ loggedInUser.userName }</p>
 					<button class="col btn btn-info btn-sm round m-2"
-						onclick="window.location.href='/books';">Home</button>
+						onclick="window.location.href='/bookmarket';">Home</button>
 					<button class="col btn btn-danger btn-sm round"
 						onclick="window.location.href='/logout';">Log-Out</button>
 				</div>
@@ -46,34 +46,7 @@
 	<!-- //// MAIN AREA //////////////////////////////////////// -->
 	<main role="main">
 		<div class="container mt-4">
-			<div class="row">
-
-				<div class="bg-info round p-3">
-					<div class="d-flex justify-content-between align-items-center">
-						<h2>Books from everyone's shelves:</h2>
-						<div class="d-flex justify-content-end align-items-center">
-							<button class="col btn btn-warning btn-sm round"
-								onclick="window.location.href='/books/new';">Add a Book
-								to my Shelf</button>
-						</div>
-					</div>
-					<!-- //// TABLE TO DISPLAY ALL BOOKS //////// -->
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col"><strong>ID</strong></th>
-								<th scope="col"><strong>Title</strong></th>
-								<th scope="col"><strong>Author</strong></th>
-								<th scope="col"><strong>Posted By</strong></th>
-								<th scope="col"><strong>Action</strong></th>
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<h1>Bookmarket view</h1>
 		</div>
 	</main>
 
