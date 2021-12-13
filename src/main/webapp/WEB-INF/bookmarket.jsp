@@ -89,7 +89,7 @@
 														onclick="window.location.href='/bookmarket/${ eachBook.id }/edit';">Edit</button>
 												</div>
 												<!-- **** Button that deletes Book ************ -->
-												<form class="col" action="/market/${ eachBook.id }/delete"
+												<form class="col" action="/bookmarket/${ eachBook.id }/delete"
 													method="post">
 													<input type="hidden" name="_method" value="delete">
 													<!-- ### Converts method of form to DELETE ### -->

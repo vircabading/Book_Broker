@@ -106,6 +106,6 @@ public class BookmarketController {
 	@DeleteMapping("/{id}/delete")
 	public String booksIdDelete(@PathVariable("id") Long id, Model model) {
 		this.bookServ.delete(id);
-		return "redirect:/books";
+		return "redirect:/bookmarket";
 	}
 }
