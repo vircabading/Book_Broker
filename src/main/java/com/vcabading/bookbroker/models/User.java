@@ -57,8 +57,12 @@ public class User {
     private String confirm;
 
     // **** ONE : TO : MANY RELATIONSHIP **********************
-    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
-    private List<Book> bookList;
+    @OneToMany(mappedBy="owner", fetch = FetchType.LAZY)
+    private List<Book> ownedBooks;
+    
+    // **** ONE : TO : MANY RELATIONSHIP **********************
+    @OneToMany(mappedBy="borrower", fetch = FetchType.LAZY)
+    private List<Book> borrowedBooks;
 
 	@Column(updatable=false)		// this will not allow createdAt to be updated after creation
 	@DateTimeFormat(pattern="yyyy-MM-dd")
