@@ -72,7 +72,7 @@
 							</tr>
 						</thead>
 						<tbody>
-									<c:forEach var="eachBook" items="${ bookList }">
+							<c:forEach var="eachBook" items="${ bookList }">
 								<c:choose>
 									<c:when test="${ eachBook.borrower == null }">
 										<tr>
