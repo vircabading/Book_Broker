@@ -151,6 +151,7 @@ public class BookmarketController {
 	}
 
 	//	//// BOOKS BORROW //////////////////////////////////////////
+	
 	@GetMapping("/{id}/borrow")
 	public String bookmarketBorrow(@PathVariable("id") Long bookId, HttpSession session) {
 		//	---- Check if User is Logged In  ------------------------
@@ -161,6 +162,23 @@ public class BookmarketController {
     	User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
 		Book book = this.bookServ.retrieveBook(bookId);
 		book.setBorrower(loggedInUser);
+		this.bookServ.update(book);
+		return "redirect:/bookmarket";
+	}
+	
+	//	//// BOOKS RETURN //////////////////////////////////////////
+	
+	@GetMapping("/{id}/return")
+	public String bookmarketIdReturn(@PathVariable("id") Long bookId, HttpSession session) {
+		//	---- Check if User is Logged In  ------------------------
+    	if (session.isNew() || session.getAttribute("user_id") == null) {
+    		return "redirect:/";
+    	}
+    	//	---- Get the Log In User --------------------------------
+    	User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
+    	//	---- Get the book specified by book id ------------------
+		Book book = this.bookServ.retrieveBook(bookId);
+		book.setBorrower(null);
 		this.bookServ.update(book);
 		return "redirect:/bookmarket";
 	}
