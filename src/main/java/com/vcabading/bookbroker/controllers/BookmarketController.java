@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vcabading.bookbroker.models.Book;
@@ -99,13 +100,68 @@ public class BookmarketController {
 	//	//// BOOKS EDIT ////////////////////////////////////////////
 	//	Edit information from a Book
 
-
+    //	**** GET: Render Edit Form *********************************
+    @GetMapping("/{id}/edit")
+    public String booksmarketEdit(@PathVariable("id") Long id,
+    							Model model, HttpSession session) {
+    	//  ---- Check if User is Logged In  -----------------------
+    	if (session.isNew() || session.getAttribute("user_id") == null) {
+    		return "redirect:/";
+    	}
+    	//	---- Get the Log In User -------------------------------
+    	User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
+    	model.addAttribute("loggedInUser", loggedInUser);
+    	//	---- Get Book specified by ID --------------------------
+    	Book oldBook = this.bookServ.retrieveBook(id);
+    	model.addAttribute("oldBook", oldBook);
+    	return "bookmarketidedit.jsp";
+    }
+    
+    //	**** PUT: Update Old Book on database *************************
+    @PutMapping("/{id}/edit")
+    public String bookmarketEditPutt(@Valid @ModelAttribute("oldBook") Book oldBook,
+    		BindingResult result, @PathVariable("id") Long id,
+    		Model model, HttpSession session) {
+    	// 	---- Check if User is Logged In  ------------------------
+    	if (session.isNew() || session.getAttribute("user_id") == null) {
+    		return "redirect:/";
+    	}
+    	//	---- Get the Log In User --------------------------------
+    	User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
+    	model.addAttribute("loggedInUser", loggedInUser);
+    	oldBook.setOwner(loggedInUser);
+    	if (result.hasErrors()) {
+            return "bookmarketidedit.jsp";
+        } else {
+        	this.bookServ.update(oldBook);
+            return "redirect:/bookmarket/" + oldBook.getId();
+        }
+    }
 
 	//	//// BOOKS DELETE //////////////////////////////////////////
 
 	@DeleteMapping("/{id}/delete")
-	public String booksIdDelete(@PathVariable("id") Long id, Model model) {
+	public String booksIdDelete(@PathVariable("id") Long id, Model model, HttpSession session) {
+//	 	---- Check if User is Logged In  ------------------------
+    	if (session.isNew() || session.getAttribute("user_id") == null) {
+    		return "redirect:/";
+    	}
 		this.bookServ.delete(id);
+		return "redirect:/bookmarket";
+	}
+
+	//	//// BOOKS BORROW //////////////////////////////////////////
+	@GetMapping("/{id}/borrow")
+	public String bookmarketBorrow(@PathVariable("id") Long bookId, HttpSession session) {
+		//	---- Check if User is Logged In  ------------------------
+    	if (session.isNew() || session.getAttribute("user_id") == null) {
+    		return "redirect:/";
+    	}
+    	//	---- Get the Log In User --------------------------------
+    	User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
+		Book book = this.bookServ.retrieveBook(bookId);
+		book.setBorrower(loggedInUser);
+		this.bookServ.update(book);
 		return "redirect:/bookmarket";
 	}
 }

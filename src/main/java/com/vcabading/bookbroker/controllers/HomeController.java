@@ -63,6 +63,9 @@ public class HomeController {
     	//	---- Get All Books -------------------------------------
     	List<Book> bookList = this.bookServ.retrieveAll();
     	model.addAttribute("bookList", bookList);
+    	//	---- Get User's Borrowed Books -------------------------
+    	List<Book> borrowedBookList = loggedInUser.getBorrowedBooks();
+    	model.addAttribute("borrowedBookList", borrowedBookList);
     	return "bookmarket.jsp";
     }
     
