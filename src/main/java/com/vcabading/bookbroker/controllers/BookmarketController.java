@@ -65,7 +65,6 @@ public class BookmarketController {
 		if (session.isNew() || session.getAttribute("user_id") == null) {
 			return "redirect:/";
 		}
-		System.out.println("**** In GET: /bookmarket/new ****");
 		//	---- Get the Log In User -------------------------------
 		User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
 		model.addAttribute("loggedInUser", loggedInUser);
@@ -79,7 +78,6 @@ public class BookmarketController {
 	@PostMapping("/new")
 	public String booksNewPost(@Valid @ModelAttribute("newBook") Book newBook, BindingResult result, Model model,
 			HttpSession session) {
-		System.out.println("**** In POST: /bookmarket/new ****");
 		// 	---- Check if User is Logged In  ------------------------
 		if (session.isNew() || session.getAttribute("user_id") == null) {
 			return "redirect:/";
@@ -173,8 +171,6 @@ public class BookmarketController {
     	if (session.isNew() || session.getAttribute("user_id") == null) {
     		return "redirect:/";
     	}
-    	//	---- Get the Log In User --------------------------------
-    	User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
     	//	---- Get the book specified by book id ------------------
 		Book book = this.bookServ.retrieveBook(bookId);
 		book.setBorrower(null);

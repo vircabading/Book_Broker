@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!-- c:out ; c:forEach etc. -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- Formatting (dates) -->
+<!-- Formatting (dates, time, and Currency) -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- form:form -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -49,6 +49,7 @@
 			<div class="row">
 				<div class="col-10">
 					<h1>Change your entry, ${ loggedInUser.userName }!</h1>
+					<p>Session User ID: ${ user_id }</p>
 					<!-- //// FORM TO ENTER A NEW BOOK ///////// -->
 					<form:form class="bg-info round p-3"
 						action="/bookmarket/${ oldBook.id }/edit" method="post"
@@ -57,6 +58,8 @@
 						<input type="hidden" name="_method" value="put" />
 						<!-- ### Input the Borrower into oldBook Form:form ### -->
 						<form:input type="hidden" path="borrower" value="${ oldBook.borrower.id }" />
+						<!-- ### Input the Owner into oldBook Form:form ### -->
+						<form:input type="hidden" path="owner" value="${ user_id }" />
 						<!-- **** Title **** -->
 						<p class="form-group">
 							<form:label path="title">Book Title:</form:label>
