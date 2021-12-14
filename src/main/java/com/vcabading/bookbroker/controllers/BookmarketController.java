@@ -113,6 +113,9 @@ public class BookmarketController {
     	model.addAttribute("loggedInUser", loggedInUser);
     	//	---- Get Book specified by ID --------------------------
     	Book oldBook = this.bookServ.retrieveBook(id);
+    	System.out.println("**** In Get bookmarket/id/edit *********");
+    	//System.out.println("Book Borrower: " + oldBook.getBorrower().getUserName());
+    	model.addAttribute("oldBookBorrower",oldBook.getBorrower());
     	model.addAttribute("oldBook", oldBook);
     	return "bookmarketidedit.jsp";
     }
@@ -130,6 +133,11 @@ public class BookmarketController {
     	User loggedInUser = this.userServ.retrieveUser((Long) session.getAttribute("user_id"));
     	model.addAttribute("loggedInUser", loggedInUser);
     	oldBook.setOwner(loggedInUser);
+    	System.out.println("**** In PUT bookmarket/id/edit *********");
+    	User oldBookBorrower = (User) session.getAttribute("oldBookBorrower");
+    	System.out.println("oldBook Borrower: " + oldBookBorrower);
+    	System.out.println("oldBook Borrower: " + oldBook.getBorrower());
+    	//oldBook.setBorrower(oldBookBorrower);
     	if (result.hasErrors()) {
             return "bookmarketidedit.jsp";
         } else {

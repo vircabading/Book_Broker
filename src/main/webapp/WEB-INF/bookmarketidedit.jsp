@@ -49,12 +49,15 @@
 			<div class="row">
 				<div class="col-10">
 					<h1>Change your entry, ${ loggedInUser.userName }!</h1>
+					<p>Old Book Borrower ID: ${ oldBook.borrower.id }</p>
 					<!-- //// FORM TO ENTER A NEW BOOK ///////// -->
 					<form:form class="bg-info round p-3"
 						action="/bookmarket/${ oldBook.id }/edit" method="post"
 						modelAttribute="oldBook">
 						<!-- ### Convert method of form to PUT ### -->
 						<input type="hidden" name="_method" value="put" />
+						<!-- ### Convert method of form to PUT ### -->
+						<input type="hidden" path="borrower" value="${ oldBook.borrower.id }" />
 						<!-- **** Title **** -->
 						<p class="form-group">
 							<form:label path="title">Book Title:</form:label>

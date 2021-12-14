@@ -47,15 +47,17 @@
 	<main role="main">
 		<div class="container mt-4">
 			<div class="row">
-				<p>Hello, ${ loggedInUser.userName }.  Welcome to:</p>
-				<h1 class="text-danger"><strong>The Book Broker</strong></h1>
+				<p>Hello, ${ loggedInUser.userName }. Welcome to:</p>
+				<h1 class="text-danger">
+					<strong>The Book Broker</strong>
+				</h1>
 				<div class="bg-info round p-3">
 					<div class="d-flex justify-content-between align-items-center">
 						<p>Available Books to borrow:</p>
 						<div class="d-flex justify-content-end align-items-center">
 							<button class="col btn btn-warning btn-sm round"
-								onclick="window.location.href='/bookmarket/new';">Add a Book
-								to my Shelf</button>
+								onclick="window.location.href='/bookmarket/new';">Add a
+								Book to my Shelf</button>
 						</div>
 					</div>
 					<!-- //// TABLE TO DISPLAY ALL BOOKS //////// -->
@@ -70,50 +72,53 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="eachBook" items="${ bookList }">
-								<tr>
-									<td>${ eachBook.id }</td>
-									<td><a class="text-dark text-decoration-none"
-										href="/books/${ eachBook.id }">${ eachBook.title }</a></td>
-									<td>${ eachBook.author }</td>
-									<td>${ eachBook.owner.userName }</td>
-									<td class="row">
-										<!-- **** Button that points to Book View ************ -->
-										<div class="col">
-											<button class="btn btn-primary btn-sm round"
-												onclick="window.location.href='/bookmarket/${ eachBook.id }';">View</button>
-										</div> 
-										<c:choose>
-											<c:when test="${user_id == eachBook.owner.id}">
+									<c:forEach var="eachBook" items="${ bookList }">
+								<c:choose>
+									<c:when test="${ eachBook.borrower == null }">
+										<tr>
+											<td>${ eachBook.id }</td>
+											<td><a class="text-dark text-decoration-none"
+												href="/books/${ eachBook.id }">${ eachBook.title }</a></td>
+											<td>${ eachBook.author }</td>
+											<td>${ eachBook.owner.userName }</td>
+											<td class="row">
+												<!-- **** Button that points to Book View ************ -->
 												<div class="col">
-													<button class="btn btn-warning btn-sm round"
-														onclick="window.location.href='/bookmarket/${ eachBook.id }/edit';">Edit</button>
-												</div>
-												<!-- **** Button that deletes Book ************ -->
-												<form class="col" action="/bookmarket/${ eachBook.id }/delete"
-													method="post">
-													<input type="hidden" name="_method" value="delete">
-													<!-- ### Converts method of form to DELETE ### -->
-													<button class="btn btn-danger btn-sm round">Delete</button>
-												</form>
-											</c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${ eachBook.borrower == null }">
-												<!-- **** Button that borrows a book **** -->
-												<div class="col">
-													<button class="btn btn-success btn-sm round"
-														onclick="window.location.href='/bookmarket/${ eachBook.id }/borrow';">Borrow</button>
-												</div>
-											</c:when>
-										</c:choose>
-									</td>
-								</tr>
+													<button class="btn btn-primary btn-sm round"
+														onclick="window.location.href='/bookmarket/${ eachBook.id }';">View</button>
+												</div> <c:choose>
+													<c:when test="${user_id == eachBook.owner.id}">
+														<div class="col">
+															<button class="btn btn-warning btn-sm round"
+																onclick="window.location.href='/bookmarket/${ eachBook.id }/edit';">Edit</button>
+														</div>
+														<!-- **** Button that deletes Book ************ -->
+														<form class="col"
+															action="/bookmarket/${ eachBook.id }/delete"
+															method="post">
+															<input type="hidden" name="_method" value="delete">
+															<!-- ### Converts method of form to DELETE ### -->
+															<button class="btn btn-danger btn-sm round">Delete</button>
+														</form>
+													</c:when>
+												</c:choose> <c:choose>
+													<c:when test="${ eachBook.borrower == null }">
+														<!-- **** Button that borrows a book **** -->
+														<div class="col">
+															<button class="btn btn-success btn-sm round"
+																onclick="window.location.href='/bookmarket/${ eachBook.id }/borrow';">Borrow</button>
+														</div>
+													</c:when>
+												</c:choose>
+											</td>
+										</tr>
+									</c:when>
+								</c:choose>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-			
+
 				<div class="bg-info round p-3 mt-5">
 					<p>Books ${ loggedInUser.userName } is borrowing:</p>
 					<!-- //// TABLE TO DISPLAY BORROWED BOOKS //////// -->
@@ -140,28 +145,27 @@
 										<div class="col">
 											<button class="btn btn-primary btn-sm round"
 												onclick="window.location.href='/bookmarket/${ eachBook.id }';">View</button>
-										</div> 
-										<c:choose>
+										</div> <c:choose>
 											<c:when test="${user_id == eachBook.owner.id}">
 												<div class="col">
 													<button class="btn btn-warning btn-sm round"
 														onclick="window.location.href='/bookmarket/${ eachBook.id }/edit';">Edit</button>
 												</div>
 												<!-- **** Button that deletes Book ************ -->
-												<form class="col" action="/bookmarket/${ eachBook.id }/delete"
-													method="post">
+												<form class="col"
+													action="/bookmarket/${ eachBook.id }/delete" method="post">
 													<input type="hidden" name="_method" value="delete">
 													<!-- ### Converts method of form to DELETE ### -->
 													<button class="btn btn-danger btn-sm round">Delete</button>
 												</form>
 											</c:when>
-										</c:choose>
-										<c:choose>
+										</c:choose> <c:choose>
 											<c:when test="${ eachBook.borrower != null }">
 												<!-- **** Button that Returns a borrowed book **** -->
 												<div class="col">
 													<button class="btn btn-warning btn-sm round"
-														onclick="window.location.href='/bookmarket/${ eachBook.id }/return';">Return Book</button>
+														onclick="window.location.href='/bookmarket/${ eachBook.id }/return';">Return
+														Book</button>
 												</div>
 											</c:when>
 										</c:choose>
